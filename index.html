@@ -199,6 +199,142 @@
       const containerRect = buttonsContainer.getBoundingClientRect();
       const btnRect = noBtn.getBoundingClientRect();
 
+      // Increased range to make button escape farther
+      const maxX = Math.max(0, containerRect.width - btnRect.width);
+      const maxY = Math.max(0, containerRect.height - btnRect.height);
+
+      noBtn.style.left = Math.random() * maxX + "px";
+      noBtn.style.top = Math.random() * maxY + "px";
+    });
+
+    yesBtn.addEventListener("click", () => {
+      yesSound.play();
+
+      confetti({
+        particleCount: 260,
+        spread: 120,
+        origin: { y: 0.65 }
+      });
+
+      setTimeout(() => {
+        alert("YAY 💕 I can’t wait for Valentine’s Day with you!");
+      }, 500);
+    });
+
+    function createHeart() {
+      const heart = document.createElement("div");
+      heart.className = "heart";
+      heart.innerHTML = Math.random() > 0.5 ? "❤️" : "💗";
+      heart.style.left = Math.random() * 50 + "vw";
+      heart.style.fontSize = Math.random() * 22 + 14 + "px";
+      heart.style.animationDuration = Math.random() * 3 + 4 + "s";
+      heart.style.opacity = Math.random() * 0.5 + 0.4;
+
+      document.body.appendChild(heart);
+      setTimeout(() => heart.remove(), 8000);
+    }
+
+    setInterval(createHeart, 380);
+  </script>
+
+</body>
+</html>
+
+    }
+
+    button:active {
+      transform: scale(0.94);
+    }
+
+    #yes {
+      left: 12%;
+      background: linear-gradient(135deg, #ff4d6d, #ff758f);
+      color: #fff;
+      box-shadow: 0 15px 35px rgba(255,77,109,0.55);
+    }
+
+    #yes:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 20px 40px rgba(255,77,109,0.7);
+    }
+
+    #no {
+      left: 55%;
+      background: rgba(255,255,255,0.9);
+      color: #777;
+    }
+
+    .hint {
+      margin-top: 28px;
+      font-size: 13px;
+      color: #6b6b6b;
+      font-style: italic;
+    }
+
+    /* Floating depth hearts */
+    .heart {
+      position: absolute;
+      bottom: -20px;
+      animation: floatUp linear forwards;
+      pointer-events: none;
+      filter: blur(0.3px);
+    }
+
+    @keyframes floatUp {
+      from {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+      }
+      to {
+        transform: translateY(-120vh) scale(1.8);
+        opacity: 0;
+      }
+    }
+
+    /* Responsive */
+    @media (max-width: 480px) {
+      h2 { font-size: 23px; }
+      .emoji { font-size: 58px; }
+      button { padding: 12px 28px; font-size: 15px; }
+      #yes { left: 8%; }
+      #no { left: 55%; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="card">
+    <div class="emoji">🐱❤️</div>
+    <h2>Radhuuu,<br>Will you marry</h2>
+
+    <div class="buttons">
+      <button id="yes">Yes 💖</button>
+      <button id="no">No 🙈</button>
+    </div>
+
+    <div class="hint">Some love stories don’t allow “no” ✨</div>
+  </div>
+
+  <!-- Sounds -->
+  <audio id="hoverSound" src="https://assets.mixkit.co/sfx/preview/mixkit-cartoon-voice-laugh-343.mp3"></audio>
+  <audio id="yesSound" src="https://assets.mixkit.co/sfx/preview/mixkit-achievement-bell-600.mp3"></audio>
+
+  <script>
+    const noBtn = document.getElementById("no");
+    const yesBtn = document.getElementById("yes");
+    const card = document.querySelector(".card");
+    const hoverSound = document.getElementById("hoverSound");
+    const yesSound = document.getElementById("yesSound");
+
+    noBtn.addEventListener("mouseenter", () => {
+      hoverSound.currentTime = 0;
+      hoverSound.play();
+
+      const buttonsContainer = document.querySelector(".buttons");
+      const containerRect = buttonsContainer.getBoundingClientRect();
+      const btnRect = noBtn.getBoundingClientRect();
+
       const maxX = Math.max(0, containerRect.width - btnRect.width - 10);
       const maxY = Math.max(0, containerRect.height - btnRect.height - 10);
 
